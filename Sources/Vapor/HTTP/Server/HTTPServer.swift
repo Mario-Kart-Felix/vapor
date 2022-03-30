@@ -222,7 +222,7 @@ public final class HTTPServer: Server {
     }
 
     private let responder: Responder
-    private let configuration: Configuration
+    private var configuration: Configuration
     private let eventLoopGroup: EventLoopGroup
     
     private var connection: HTTPServerConnection?
@@ -231,7 +231,7 @@ public final class HTTPServer: Server {
 
     private var application: Application
     
-    init(
+    public init(
         application: Application,
         responder: Responder,
         configuration: Configuration,
@@ -277,6 +277,7 @@ public final class HTTPServer: Server {
             on: self.eventLoopGroup
         ).wait()
 
+        self.configuration = configuration
         self.didStart = true
     }
     
